@@ -11,6 +11,9 @@ public class Util {
     private static final String PASSWORD = "mysql";
     private static Connection connection;
 
+    private Util() {
+    }
+
     public static Connection getConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -18,5 +21,15 @@ public class Util {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
